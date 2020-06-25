@@ -1,0 +1,1 @@
+This repository contains the code of my project: Sorting Visualizer. As the name suggests, the program would help us see the sorting algorithm working in real time with variable array sizes. 

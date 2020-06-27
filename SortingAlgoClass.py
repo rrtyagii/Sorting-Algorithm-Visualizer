@@ -1,19 +1,22 @@
 import random
 import time
+from GUI import draw_array
 from datetime import timedelta
 
 
 class Sorting:
-    def bubble_sort(self,lst):
+    def bubble_sort(self,lst,draw_array):
         for i in range(len(lst)):
             swapped= False
             for j in range(0, len(lst)-i-1):
                 if lst[j]> lst[j+1]:
                     lst[j], lst[j+1] = lst[j+1], lst[j]
                     swapped = True
+                    draw_array(lst)
+                    time.sleep(0.2)
             if swapped == False:
                 break
-        return lst
+#        return lst
 
     def insertion_sort(self, lst):
         for i in range(1, len(lst)):

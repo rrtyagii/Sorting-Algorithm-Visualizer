@@ -2,16 +2,17 @@ from tkinter import *
 import tkinter
 from tkinter import ttk
 import random
-from SortingAlgoClass import*
+import SortingAlgoClass
 
 
 
 root = Tk()
 root.title('Sorting Algorithm Visualizer')
 root.maxsize(900, 600)
-
+arr=[]
 
 def selected_algo():
+    global arr
     print("Algorithm Selected: "+currAlgorithms.get())
     arr = []
     try:
@@ -42,6 +43,21 @@ def draw_array(array):
         canvas.create_rectangle(x1, y1, x2, y2, fill = 'yellow')
         canvas.create_text(x1 +2, y1, anchor= SW, text= str(array[i]))
 
+def sorting():
+    global arr
+    sac.Sorting.bubble_sort(arr,draw_array(arr))
+    print("starting bubble sort")
+
+
+def swap_two_pos(pos_0, pos_1):
+#    x_00
+    pass
+
+
+def random_sort():
+    pass
+
+
 
 currAlgorithms = StringVar()
 
@@ -60,16 +76,20 @@ algMenu= ttk.Combobox(mainFrame, textvariable=currAlgorithms, values=['Bubble So
 algMenu.grid(row=0, column =1, padx =5, pady=5, sticky = W)
 algMenu.current(3)
 
+speedScale = Scale(mainFrame, from_=1, to=200, length =200, digits=2, resolution=0.2, orient= HORIZONTAL, label = 'Select Speed[s]')
+speedScale.grid(row=0, column=5, padx=5, pady=5, sticky=E)
+
+
+
 #Button(mainFrame, text='Select', command = selected_algo, bg='light blue').grid(row=1, column =0, padx =5, pady=5, sticky = W )
 Button(mainFrame, text='Generate Data', command = selected_algo, bg='light blue').grid(row=0, column =2, padx =5, pady=5)
-Button(mainFrame, text = "Sort", bg='light blue').grid(row=0, column =3, padx =5, pady=5)
+Button(mainFrame, text = "Sort", command=sorting, bg='light blue').grid(row=0, column =3, padx =5, pady=5)
 
 #Row[1]
 Label(mainFrame, text = 'Size of the array: ', bg ='light blue').grid(row =1, column=0, padx=5, pady=5, sticky= W)
 sizeEntryString=tkinter.IntVar()
 sizeEntry = Entry(mainFrame,textvariable=sizeEntryString).grid(row =1, column=1, padx=5, pady=5, sticky=W)
 #sizeEntryString = sizeEntry.get()
-
 
 
 Label(mainFrame, text = 'Min Value: ', bg ='grey').grid(row =1, column=2, padx=5, pady=5, sticky= W)

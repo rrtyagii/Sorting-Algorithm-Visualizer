@@ -1,22 +1,17 @@
-import random
+#import random
 import time
-from GUI import draw_array
-from datetime import timedelta
+#from GUI import draw_array
+#from datetime import timedelta
 
 
-class Sorting:
-    def bubble_sort(self,lst,draw_array):
-        for i in range(len(lst)):
-            swapped= False
-            for j in range(0, len(lst)-i-1):
-                if lst[j]> lst[j+1]:
-                    lst[j], lst[j+1] = lst[j+1], lst[j]
-                    swapped = True
-                    draw_array(lst)
-                    time.sleep(0.2)
-            if swapped == False:
-                break
-#        return lst
+class sorting_function:
+    def bubble_sort(self,lst,draw_array, timetick):
+        for _ in range(len(lst)-1):
+            for j in range(len(lst)-1):
+                if lst[j] > lst[j+1]:
+                    lst[j],lst[j+1] = lst[j+1], lst[j]
+                    draw_array(lst, ['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))])
+                    time.sleep(timetick)
 
     def insertion_sort(self, lst):
         for i in range(1, len(lst)):
@@ -95,7 +90,7 @@ class Sorting:
 
 
 
-sorti = Sorting()
+sorti = sorting_function()
 lst = [29,99,27,41,66,28,44,78,87,19,31,76,58,88,83,97,12,21,44]
 print(lst)
 print("#Sorted List")

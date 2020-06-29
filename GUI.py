@@ -9,11 +9,15 @@ sortingClass= sorting_function()
 root = Tk()
 root.title('Sorting Algorithm Visualizer')
 root.maxsize(900, 600)
+currAlgorithms = StringVar()
 arr=[]
 
-def selected_algo():
-    global arr
+def algorithm_selected():
     print("Algorithm Selected: "+currAlgorithms.get())
+
+def random_array_generator():
+    global arr
+    algorithm_selected()
     arr = []
     try:
         for i in range(sizeEntryString.get()):
@@ -46,9 +50,17 @@ def draw_array(array,colourArray):
 
 
 def sorting():
+# 'Bubble Sort', 'Insertion Sort', 'Selection Sort','Quick Sort', 'Merge Sort'
     global arr
-    sortingClass.bubble_sort(arr, draw_array,speedScale.get())
-    print("starting bubble sort")
+    if currAlgorithms.get() == 'Bubble Sort':
+        sortingClass.bubble_sort(arr, draw_array,speedScale.get())
+        print("starting bubble sort")
+    if currAlgorithms.get() == 'Insertion Sort':
+        sortingClass.insertion_sort(arr,draw_array, speedScale.get())
+    if currAlgorithms.get() == 'Selection Sort':
+        sortingClass.selection_sort(arr,draw_array, speedScale.get())
+    if currAlgorithms.get() == 'Quick Sort':
+        sortingClass.quick_sort(arr,0, len(arr)-1,draw_array, speedScale.get())
 
 
 def swap_two_pos(pos_0, pos_1):
@@ -63,10 +75,6 @@ def random_sort():
 def from_rgb(rgb):
     """Trying to translate an rgb tuple of into a tkinter friendly colour code"""
     return "#%02x%02x%02x" %rgb
-
-
-
-currAlgorithms = StringVar()
 
 
 root.config(bg = 'black')
@@ -90,7 +98,7 @@ speedScale.grid(row=0, column=5, padx=5, pady=5, sticky=E)
 
 
 #Button(mainFrame, text='Select', command = selected_algo, bg='light blue').grid(row=1, column =0, padx =5, pady=5, sticky = W )
-Button(mainFrame, text='Generate Data', command = selected_algo, bg='#b5bdc4').grid(row=0, column =2, padx =5, pady=5)
+Button(mainFrame, text='Generate Data', command = random_array_generator, bg='#b5bdc4').grid(row=0, column =2, padx =5, pady=5)
 Button(mainFrame, text = "Start the Sort", command=sorting, bg='#b5bdc4').grid(row=0, column =3, padx =5, pady=5)
 
 #Row[1]

@@ -13,7 +13,7 @@ class sorting_function:
                     draw_array(lst, ['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))])
                     time.sleep(timetick)
 
-    def insertion_sort(self, lst):
+    def insertion_sort(self, lst, draw_arra, timetick):
         for i in range(1, len(lst)):
             key = lst[i]
             j = i-1
@@ -21,9 +21,10 @@ class sorting_function:
                 lst[j+1] = lst[j]
                 j-=1
             lst[j+1] = key
-        return lst
+            draw_arra(lst, ['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))] )
+            time.sleep(timetick)
 
-    def selection_sort(self, lst):
+    def selection_sort(self, lst, draw_array, timetick):
         for i in range(len(lst)):
             min_index = i
             for j in range(i+1, len(lst)):
@@ -31,8 +32,8 @@ class sorting_function:
                     min_index = j
             if min_index != i:
                 lst[i], lst[min_index] = lst[min_index], lst[i]
-        return lst
-
+                draw_array(lst,['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))] )
+                time.sleep(timetick)
 
     def merge_sort(self, lst):
         if len(lst)>1:
@@ -65,14 +66,14 @@ class sorting_function:
 
 
 
-    def quick_sort(self, arr, start, end):
+    def quick_sort(self, arr, start, end, draw_array, timetick):
         if start >= end:
             return
-        index = self._partition(arr, start,end)
-        self.quick_sort(arr, start, index-1)
-        self.quick_sort(arr, index+1, end)
+        index = self._partition(arr, start, end, draw_array, timetick)
+        self.quick_sort(arr, start, index-1, draw_array, timetick)
+        self.quick_sort(arr, index+1, end, draw_array, timetick)
 
-    def _partition(self, arr, start, end):
+    def _partition(self, arr, start, end, draw_array, timetick):
         low = start+1
         pivot = arr[start]
         high  = end
@@ -83,6 +84,9 @@ class sorting_function:
                 low = low + 1
             if low<= high:
                 arr[low], arr[high] =arr[high], arr[low]
+                draw_array(arr,['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))] )
+                time.sleep(timetick)
+
             else:
                 break
         arr[start], arr[high] = arr[high], arr[start]
@@ -96,7 +100,7 @@ print(lst)
 print("#Sorted List")
 #start_time = time.process_time()
 
-(sorti.merge_sort(lst))
+(sorti.quick_sort(lst, 0, len(lst)-1))
 
 #elapsed = (time.process_time() -start_time)
 

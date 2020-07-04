@@ -35,34 +35,24 @@ class sorting_function:
                 draw_array(lst,['#8351a1' if x == j or x==j+1 else '#6c9ff0' for x in range(len(lst))] )
                 time.sleep(timetick)
 
-    def merge_sort(self, lst):
-        if len(lst)>1:
-            mid= len(lst)//2
-            L = lst[:mid]
-            R = lst[mid:]
+    def merge_sort(self, lst, drawData, timeTick):
+        if len(lst) <=1:
+            return lst
+        else:
+            mid = len(lst)//2
+            return self._merge(self.merge_sort(lst[mid:] , drawData, timeTick), self.merge_sort(lst[:mid], drawData, timeTick ) , drawData, timeTick)
 
-            self.merge_sort(L)
-            self.merge_sort(R)
-
-            i=j=k=0
-            while i < len(L) and j<len(R):
-                if L[i] < R[j]:
-                    lst[k] = L[i]
-                    i+=1
-                else:
-                    lst[k] = R[j]
-                    j+=1
-                k+=1
-
-            while i<len(L):
-                lst[k] = L[i]
+    def _merge(self, lst1, lst2, drawData, timeTick):
+        merge = []
+        i=j=0
+        while i<len(lst1) or  j<len(lst2):
+            if j == len(lst2) or (i<len(lst1) and lst1[i] < lst2[j] ):
+                merge.append(lst1[i])
                 i+=1
-                k+=1
-
-            while j<len(R):
-                lst[k] = R[j]
+            else:
+                merge.append(lst2[j])
                 j+=1
-                k+=1
+        return merge
 
 
 
@@ -92,6 +82,18 @@ class sorting_function:
         arr[start], arr[high] = arr[high], arr[start]
         return high
 
+    def colour_codes_mergeSort(self, length, left, middle, right):
+        colour_codes =[]
+        for i in range(length):
+            if i>=left and i<=right:
+                if i>=left and i<=middle:
+                    colour_codes.append("#8351a1")
+                else:
+                    colour_codes.append("#f48cfc")
+            else:
+                colour_codes.append('#6c9ff0')
+        return colour_codes
+
 
 
 sorti = sorting_function()
@@ -100,8 +102,7 @@ print(lst)
 print("#Sorted List")
 #start_time = time.process_time()
 
-(sorti.quick_sort(lst, 0, len(lst)-1))
+mergeSort=(sorti.merge_sort(lst))
 
 #elapsed = (time.process_time() -start_time)
-
-print(lst)
+print(mergeSort)

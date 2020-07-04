@@ -59,8 +59,8 @@ def sorting():
         sortingClass.insertion_sort(arr,draw_array, speedScale.get())
     if currAlgorithms.get() == 'Selection Sort':
         sortingClass.selection_sort(arr,draw_array, speedScale.get())
-    if currAlgorithms.get() == 'Quick Sort':
-        sortingClass.quick_sort(arr,0, len(arr)-1,draw_array, speedScale.get())
+#    if currAlgorithms.get() == 'Quick Sort':
+#        sortingClass.quick_sort(arr,0, len(arr)-1,draw_array, speedScale.get())
 
 
 def swap_two_pos(pos_0, pos_1):
